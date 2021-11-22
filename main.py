@@ -9,14 +9,15 @@ url = "https://www.goldmansachs.com/"
 username = "tomsmith"
 password = "SuperSecretPassword!"
 
-options = webdriver.ChromeOptions()
-options.add_experimental_option("excludeSwitches", ["enable-automation"])
-options.add_experimental_option("useAutomationExtension", False)
+#options = webdriver.ChromeOptions()
+#options.add_experimental_option("excludeSwitches", ["enable-automation"])
+#options.add_experimental_option("useAutomationExtension", False)
 
 service = ChromeService(executable_path="C:\\Dev\\WebDrivers\\chromedriver.exe")
-driver = webdriver.Chrome(service=service, options=options)
-
+driver = webdriver.Chrome(service=service)
 driver.get(url)
+while (True):
+    pass
 print(driver.title)
 
 #driver.find_element("username").send_keys(username)

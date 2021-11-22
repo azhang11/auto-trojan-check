@@ -1,20 +1,25 @@
 # Used to import the webdriver from selenium
 from selenium import webdriver
 import time
+import sys
+import glob
+import pyautogui
+import pygetwindow
+from PIL import Image
+import datetime
 import os
 
 
 # Get the path of chromedriver which you have install
 
-def startBot(username, password, url):
-
-    path = "C:\\Dev\\WebDrivers\\chromedriver.exe"
+def startBot(username, password, url, path):
 
     # giving the path of chromedriver to selenium webdriver
     driver = webdriver.Chrome(path)
 
     # opening the website in chrome.
     driver.get(url)
+    print("Reached Trojan Check")
     # driver.implicitly_wait(20000)
     time.sleep(2)
 
@@ -57,6 +62,10 @@ def startBot(username, password, url):
     time.sleep(3)
     driver.find_element_by_class_name("mat-checkbox-inner-container").click()
     driver.find_element_by_class_name("mat-focus-indicator.btn-submit.mat-flat-button.mat-button-base").click()
+
+
+
+
     while (True):
       pass
 
@@ -65,9 +74,30 @@ def startBot(username, password, url):
 f = open("logininfo.txt", "r")
 username = f.readline()
 password = f.readline()
+path = f.readline()
 
 # URL of the login page of site
 # which you want to automate login.
 url = "https://trojancheck.usc.edu/login"
+
+# Screenshot QR Code (move into function after completion)
+ss_name = "screenshot"
+ss_path = "C:\\Dev\\PythonPictures"
+titles = pygetwindow.getAllTitles()
+print(titles)
+
+x_start_point = 245
+y_start_point = 70
+x_area = 1675
+y_area = 790
+
 # Call the function
-startBot(username, password, url)
+# Currently working on only calling the function at 12AM (incomplete)
+while True:
+    now = datetime.datetime.now()
+    now_split = str(now).split(" ")
+    date = str(now_split[0])
+    raw_time = str(now_split[1]).split(".")
+    time = str(raw_time[0])
+
+startBot(username, password, url, path)

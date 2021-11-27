@@ -31,10 +31,11 @@ def startBot(username, password, url, path):
 
     # find the password by inspecting on password input
     driver.find_element_by_name("j_password").send_keys(password)
+    time.sleep(3)
 
     #Process to start assessment
-    driver.find_element_by_name("_eventId_proceed").click()
-    time.sleep(3)
+    #driver.find_element_by_name("_eventId_proceed").click()
+    #time.sleep(3)
     driver.find_element_by_class_name("mat-focus-indicator.submit-button.btn-next.mat-button.mat-button-base.mat-accent").click()
     time.sleep(3)
     driver.find_element_by_class_name("mat-focus-indicator.mat-flat-button.mat-button-base.btn-begin-assessment").click()
@@ -63,9 +64,25 @@ def startBot(username, password, url, path):
     driver.find_element_by_class_name("mat-checkbox-inner-container").click()
     driver.find_element_by_class_name("mat-focus-indicator.btn-submit.mat-flat-button.mat-button-base").click()
 
+    #Snap a screenshot of the Trojan Check and save to file
+    ss_path = "C:\\Dev\\PythonPictures\\Trojan_Check_" + (str(datetime.datetime.now()).split(" "))[0] + ".png"
 
+    window = pygetwindow.getWindowsWithTitle('Trojan Check - Google Chrome')[0]
+    # print(window)
+    x1 = window.left
+    y1 = window.top
+    height = window.height
+    width = window.width
 
+    x2 = x1 + width
+    y2 = y1 + height
 
+    pyautogui.screenshot(ss_path)
+
+    im = Image.open(ss_path)
+    im = im.crop((x1, y1, x2, y2))
+    im.save(ss_path)
+    im.show(ss_path)
     while (True):
       pass
 
@@ -80,24 +97,13 @@ path = f.readline()
 # which you want to automate login.
 url = "https://trojancheck.usc.edu/login"
 
-# Screenshot QR Code (move into function after completion)
-ss_name = "screenshot"
-ss_path = "C:\\Dev\\PythonPictures"
-titles = pygetwindow.getAllTitles()
-print(titles)
-
-x_start_point = 245
-y_start_point = 70
-x_area = 1675
-y_area = 790
-
 # Call the function
 # Currently working on only calling the function at 12AM (incomplete)
-while True:
-    now = datetime.datetime.now()
-    now_split = str(now).split(" ")
-    date = str(now_split[0])
-    raw_time = str(now_split[1]).split(".")
-    time = str(raw_time[0])
+# while True:
+#     now = datetime.datetime.now()
+#     now_split = str(now).split(" ")
+#     date = str(now_split[0])
+#     raw_time = str(now_split[1]).split(".")
+#     time = str(raw_time[0])
 
 startBot(username, password, url, path)

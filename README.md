@@ -1,5 +1,6 @@
 Auto Trojan Check will do a Trojan Check every day at a set time and send an image of the QR code to you. 
 Your device running the program must be on, unfortunately, in order for the program to execute every night. 
+DO NOT RUN THE PROGRAM IF YOU EXPERIENCE ANY SYMPTOMS OF COVID-19
 
 Setup:
 1. Clone this repository
